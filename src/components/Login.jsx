@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../components/Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
@@ -20,7 +20,8 @@ const Login = ({ onLogin }) => {
   const handleLogin = () => {
     // Simulate authentication logic (replace with actual authentication logic)
     if (credentials.username === 'omprakash' && credentials.password === 'password') {
-      onLogin(credentials.username);
+     // onLogin(setCredentials);
+      console.log("Login Successfully!",credentials.username);
     } else {
       alert('Invalid username or password');
     }

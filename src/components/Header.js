@@ -41,8 +41,8 @@ function Header() {
         unmountOnExit
       >
          <nav className="Nav">
-        <Link to="/">Dashboard</Link>
-        <Link to="/">Stocks</Link>
+        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/stocks">Stocks</Link>
         <Link to="/register">Register</Link>
         <Link to="/login">Login</Link>
           {/* <button>Logout</button> */}

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './Register.css'
 
-const Register = ({ onRegister }) => {
+const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
@@ -19,8 +19,7 @@ const Register = ({ onRegister }) => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Simulate registration logic (replace with actual registration logic)
-    onRegister(formData);
+   console.log("Form submitted successfully!", formData);
   };
 
   return (
