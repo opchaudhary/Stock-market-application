@@ -5,7 +5,7 @@ import LandingPage from './components/LandingPage';
 import Login from './components/Login';
 import Register from './components/Register';
 import Header from './components/Header'
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/MainDashboard';
 import StockSearch from './components/SearchStock';
 
 

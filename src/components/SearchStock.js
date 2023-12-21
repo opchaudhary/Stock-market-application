@@ -3,7 +3,7 @@ import useStockData from './useStockData';
 import './SearchStock.css'
 
 const StockSearch = () => {
-  const [symbol, setSymbol] = useState('');
+  const [symbol, setSymbol] = useState('AAPL');
   const { stockData, loading, error, fetchData } = useStockData();
 
   const handleSearch = () => {
