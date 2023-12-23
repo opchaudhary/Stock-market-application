@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import './MainDashboard.css';
 import News from './News';
-import companyData from './CompanyData'
 import CompanyData from './CompanyData';
 
 const MainDashboard = () => {
@@ -11,7 +10,7 @@ const MainDashboard = () => {
     const BaseUrl = 'https://api.iex.cloud/v1';
     const token = 'pk_8e0ab2b9f4474c1eae488683e98feea1';
 
-    const fetchCompanytechnical = async () => {
+    const fetchCompanytrade= async () => {
         try {
             const response = await fetch(`${BaseUrl}/data/core/iex_deep/${comp}?token=${token}`);
             if (!response.ok) {
@@ -69,7 +68,7 @@ const MainDashboard = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            await fetchCompanytechnical();
+            await fetchCompanytrade(comp);
             chart();
         };
 
@@ -79,11 +78,12 @@ const MainDashboard = () => {
     return (
         <div className="dashboard">
             <div className="dashboard-container">
-                <div className="left-dashboard">
+                 <div className="left-dashboard">
+               
                     <div className="comapany-panel">
                         <CompanyData />
                     </div>
-                </div>
+               </div>
                 <div className="right-dashboard">
                     <div className="news-panel">
                         <News />

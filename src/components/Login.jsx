@@ -21,6 +21,7 @@ const Login = () => {
     // Simulate authentication logic (replace with actual authentication logic)
     if (credentials.username === 'omprakash' && credentials.password === 'password') {
      // onLogin(setCredentials);
+     alert("Login successfully")
       console.log("Login Successfully!",credentials.username);
     } else {
       alert('Invalid username or password');

@@ -90,17 +90,17 @@ const StockSearch = () => {
   
   return (
     <div>
-      <input
-        type="text"
-        value={symbol}
-        onChange={(e) => setSymbol(e.target.value)}
-        placeholder="Enter stock symbol"
-      />
-      <button onClick={handleSearch}>Search</button>
+        <input
+          type="text"
+          value={symbol}
+          onChange={(e) => setSymbol(e.target.value)}
+          placeholder="Enter stock symbol"
+        />
+        <button onClick={handleSearch}>Search</button>
 
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
-      {renderTable()}
+        {loading && <p>Loading...</p>}
+        {error && <p>Error: {error.message}</p>}
+        {renderTable()}
     </div>
   );
 };

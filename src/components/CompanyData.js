@@ -1,5 +1,6 @@
 // CompanyData.js
 import React, { useEffect, useState } from 'react';
+import './CompanyData.css'
 
 const CompanyData = () => {
   const [compData, setCompanyData] = useState(null);
@@ -20,18 +21,31 @@ const CompanyData = () => {
       console.error('Error fetching data:', error);
     }
   };
+    const handleSearch = () => {
+      fetchCompanyData(comp);
+    };
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchCompanyData();
+      await fetchCompanyData(comp);
     };
 
     fetchData();
   }, []);
 
   return (
-    
-    <div className="left-dashboard">
+       <>
+   
+          <div>
+        <input
+          type="text"
+          value={comp}
+          onChange={(e) => setComp(e.target.value)}
+          placeholder="Enter stock symbol"
+        />
+        <button onClick={handleSearch}>Search</button>
+
+      </div>  
       {compData ? (
         <>
           <div className="heading-container">
@@ -40,31 +54,31 @@ const CompanyData = () => {
           <div className="table-container">
             <ul>
               <li>
-                <strong>Company Name:</strong> {compData.companyName}
+                <strong>Company Name :</strong> {compData.companyName}
               </li>
               <li>
-                <strong>CEO:</strong> {compData.ceo}
+                <strong>CEO :</strong> {compData.ceo}
               </li>
               <li>
-                <strong>Industry:</strong> {compData.industry}
+                <strong>Industry :</strong> {compData.industry}
               </li>
               <li>
-                <strong>Sector:</strong> {compData.sector}
+                <strong>Sector :</strong> {compData.sector}
               </li>
               <li>
-                <strong>Total Employees:</strong> {compData.employees}
+                <strong>Total Employees :</strong> {compData.employees}
               </li>
               <li>
-                <strong>Symbol:</strong> {compData.symbol}
+                <strong>Symbol :</strong> {compData.symbol}
               </li>
               <li>
-                <strong>Description:</strong> {compData.longDescription}
+                <strong>Description :</strong> {compData.longDescription}
               </li>
               <li>
-                <strong>Exchange:</strong> {compData.exchange}
+                <strong>Exchange :</strong> {compData.exchange}
               </li>
               <li>
-                <strong>Website:</strong>{' '}
+                <strong>Website :</strong>{' '}
                 <a href={compData.website} target="_blank" rel="noopener noreferrer">
                   {compData.website}                                                                                                                                                                                 
                 </a>
@@ -76,7 +90,8 @@ const CompanyData = () => {
       ) : (
         <p>Loading company data...</p>
       )}
-    </div>
+   </>
+    
   );
 };
 
