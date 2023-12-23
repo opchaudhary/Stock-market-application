@@ -11,12 +11,12 @@
 }
 
 .left-dashboard {
-    color: coral;
+   color: blanchedalmond;
     flex: 3 1;
-    padding: 3%;
-    border: 8px solid #fff;
-    border-radius: 142px;
-    margin-right: 20px;
+    padding: 12px;
+    border: 3px solid #FA3;
+    border-radius: 19px;
+    margin-right: 10px;
 
 }
 
@@ -38,7 +38,7 @@ ul {
 }
 
 .table-container ul li {
-    margin-bottom: 5%;
+    margin-bottom: 1%;
 }
 
 .right-dashboard {

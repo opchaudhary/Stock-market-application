@@ -32,7 +32,7 @@ const News = () => {
 
   return (
     <div>
-      <h1 align="center">Newss</h1>{loading && <p>Loading...</p>}
+      <h1 align="center">News</h1>{loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
       {newsData && newsData.length > 0 && (
         <div>
