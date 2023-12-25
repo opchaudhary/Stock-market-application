@@ -2,12 +2,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../components/Login.css';
+import  {useTheme} from '../context/ThemeContext' 
+
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
     username: '',
     password: '',
   });
+  const {theme, toggleTheme} = useTheme();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +21,10 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    // Simulate authentication logic (replace with actual authentication logic)
+    // Simulate authentication logic 
     if (credentials.username === 'omprakash' && credentials.password === 'password') {
      // onLogin(setCredentials);
-     alert("Login successfully")
+      alert("Login successfully")
       console.log("Login Successfully!",credentials.username);
     } else {
       alert('Invalid username or password');
@@ -29,7 +32,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{ backgroundColor: theme.background, color: theme.text }}>
       <h2>Login</h2>
       <form>
         <label htmlFor="username">Username:</label>

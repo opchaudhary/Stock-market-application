@@ -7,11 +7,17 @@ import Register from './components/Register';
 import Header from './components/Header'
 import Dashboard from './components/MainDashboard';
 import StockSearch from './components/SearchStock';
-
-
+import { ThemeProvider } from './context/ThemeContext';
+import { useTheme } from "./context/ThemeContext";
 const App = () => {
+
+const {theme} = useTheme();
+
   return ( 
+<>
+    <ThemeProvider>
     <Router>
+      <div >
       <Header/>
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -20,7 +26,10 @@ const App = () => {
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path="/stocks" element={<StockSearch/>} />
       </Routes>
+      </div>
     </Router>
+    </ThemeProvider>
+    </>
   );
 };
 

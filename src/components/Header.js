@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { MdLightMode } from "react-icons/md";
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
-
+import  {useTheme} from '../context/ThemeContext' 
 function Header() {
+  const {theme, toggleTheme} = useTheme();
   const [isNavVisible, setNavVisibility] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -31,9 +33,10 @@ function Header() {
   };
 
   return (
-    <header className="Header">
+    <header className="Header" style= {{ backgroundColor: theme.background, color: theme.text }}>
       <img src={require("../img/nifty-bull.gif")} className="Logo" alt="logo" />
-            
+
+          
       <CSSTransition
         in={!isSmallScreen || isNavVisible}
         timeout={350}
@@ -45,7 +48,7 @@ function Header() {
         <Link to="/stocks">Stocks</Link>
         <Link to="/register">Register</Link>
         <Link to="/login">Login</Link>
-          {/* <button>Logout</button> */}
+        <MdLightMode onClick={toggleTheme}/>
         </nav>
       </CSSTransition>
       <button onClick={toggleNav} className="menu">

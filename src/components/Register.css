@@ -11,14 +11,10 @@
     display: auto;
   }
 
-  h2 {
-    color: white
-  }
-  
   label {
     margin-bottom: 6px;
     font-size: 0.9em;
-    color:white;
+   
   }
   
   input {
@@ -32,7 +28,7 @@
   }
   
   button {
-    background-color: #28a745;
+    background-color: #831c60;
     display: flow;
     padding: 8px;
     margin-bottom: 0px;
@@ -49,11 +45,11 @@
   p {
     text-align: center;
     margin-top: 10px;
-    color: #868e96;
+ 
   }
   
   a {
-    color: #007bff;
+  
     text-decoration: none;
   }
   

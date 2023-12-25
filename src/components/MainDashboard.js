@@ -1,98 +1,149 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Highcharts from 'highcharts';
 import './MainDashboard.css';
 import News from './News';
 import CompanyData from './CompanyData';
 
 const MainDashboard = () => {
-    const [data, setData] = useState();
-    const [comp, setComp] = useState('AAPL');
-    const BaseUrl = 'https://api.iex.cloud/v1';
-    const token = 'pk_8e0ab2b9f4474c1eae488683e98feea1';
+  const [comp, setComp] = useState('');
+  const [company, setCompany] = useState([]);
+  const [tradeData, setTradeData] = useState([]);
+  const [data, setData] = useState();
+  const token = 'pk_8e0ab2b9f4474c1eae488683e98feea1';
+  const BaseUrl= 'https://api.iex.cloud/v1';
 
-    const fetchCompanytrade= async () => {
-        try {
-            const response = await fetch(`${BaseUrl}/data/core/iex_deep/${comp}?token=${token}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result = await response.json();
-            setData(result);
-            console.log('TradeData', result);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-    const chart = () => {
-        Highcharts.chart('ch', {
-            title: {
-                text: 'Line Chart',
-                style: {
-                    color: '#FFF',
-                },
-            },
-            chart: {
-                backgroundColor: '#0b1d33',
-            },
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            },
-            xAxis: {
-                labels: {
-                    style: {
-                        color: '#FFF',
-                    },
-                },
-                title: {
-                    text: 'X Axis',
-                },
-            },
-            yAxis: {
-                labels: {
-                    style: {
-                        color: '#FFF',
-                    },
-                },
-                title: {
-                    text: 'Values',
-                },
-            },
-            series: [
-                {
-                    name: 'Series 1',
-                    data: [10, 20, 25, 20, 50, 30, 70, 80, 10, 110, 110, 120, 10, 20, 25, 20, 50, 30, 70, 80, 10, 110, 110, 120, 10, 20, 25, 20, 50, 30, 70, 80, 10, 110, 110, 120, 10, 20, 25, 20, 50, 30, 70, 80, 10, 110, 110, 120],
-                },
-            ],
-        });
-    };
+  const handleSearch = async () => {
+    try {
+      const companyResponse = await fetchCompanyData(comp);
+      setCompany(companyResponse);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await fetchCompanytrade(comp);
-            chart();
-        };
+      const tradeResponse = await fetchCompanyTrade(comp);
+      setTradeData(tradeResponse);
+      console.log(tradeResponse);
 
-        fetchData();
-    }, []);
+      setData(tradeResponse);
+      console.log(data)
 
-    return (
-        <div className="dashboard">
-            <div className="dashboard-container">
-                 <div className="left-dashboard">
-               
-                    <div className="comapany-panel">
-                        <CompanyData />
-                    </div>
-               </div>
-                <div className="right-dashboard">
-                    <div className="news-panel">
-                        <News />
-                    </div>
-                </div>
-            </div>
-            <div id="ch" style={{ width: '100%', height: '50%' }}></div>
-        </div>
+      chart();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const fetchCompanyData = async (symbol) => {
+    const response = await fetch(
+      `${BaseUrl}/data/core/company/${symbol}?token=${token}`
     );
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    return response.json();
+  };
+
+  const fetchCompanyTrade = async (symbol) => {
+    const response = await fetch(
+      `${BaseUrl}/data/core/iex_deep/${symbol}?token=${token}`
+    );
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  };
+
+  const tradePrices = data && data[0] && data[0].trades
+  ? data[0].trades.map((trade) => trade.price)
+  : [];
+console.log("tradePrice: ", tradePrices);
+
+const tradeTime = data && data[0] && data[0].trades
+  ? data[0].trades.map((trade) => trade.timestamp)
+  : [];
+console.log("timestamp: ", tradeTime);
+
+const chart = () => {
+  Highcharts.chart('chart', {
+      title: {
+          text: " Trade's Line Chart",
+          style: {
+              color: 'violet',
+          },
+      },
+      chart: {
+          color: 'blue'
+
+      },
+      xAxis: {
+          labels: {
+              style: {
+                  color: 'black',
+              },
+          },
+          title: {
+              text: 'TimeStamp ',
+          },
+      },
+   xAxis: {
+          categories: tradeTime,
+      },
+
+      yAxis: {
+          labels: {
+              style: {
+                  color: 'black',
+              },
+          },
+          title: {
+              text: 'Price ',
+          },
+      },
+      series: [
+          {
+              name: 'Series 1',
+              data: tradePrices
+
+          },
+          // {
+          //     name: 'Series 2',
+          //     color: 'red',
+          //     data: tradePrices2
+
+          // },
+      ],
+
+
+
+  });
+};
+
+  return (
+    <div className="dashboard">
+      <div>
+        <input
+          type="text"
+          value={comp}
+          onChange={(e) => setComp(e.target.value)}
+          placeholder="Enter stock symbol"
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
+
+      <div className="dashboard-container">
+        <div className="left-dashboard">
+          <CompanyData company={company} />
+        </div>
+        <div className="right-dashboard">
+          <div className="news-panel">
+            <News />
+          </div>
+        </div>
+      </div>
+
+      <div id="chart" style={{ width: '95%', height: '50%', padding: '5px', margin: 'auto' }}></div>
+    </div>
+  );
 };
 
 export default MainDashboard;

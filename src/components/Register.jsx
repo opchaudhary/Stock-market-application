@@ -1,7 +1,7 @@
 // Register.js
 import React, { useState } from 'react';
 import './Register.css'
-
+import  {useTheme} from '../context/ThemeContext' 
 const Register = () => {
   const [formData, setFormData] = useState({
     username: '',
@@ -16,14 +16,14 @@ const Register = () => {
       [name]: value,
     });
   };
-
+ const {theme, toggleTheme} = useTheme();
   const handleRegister = (e) => {
     e.preventDefault();
    console.log("Form submitted successfully!", formData);
   };
 
   return (
-    <div className='register-container'>
+    <div className='register-container' style={{ backgroundColor: theme.background, color: theme.text }}>
       <h2 >Register Form</h2>
       <form onSubmit={handleRegister}>
         <label>
