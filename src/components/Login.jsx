@@ -8,8 +8,8 @@ import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    username: 'omprakash',
-    password: 'password',
+    username: '',
+    password: '',
   });
   const { userLogin} = useAuth();
   const [logged, setLogged] = useState(false);
@@ -25,11 +25,12 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    userLogin();
-    setLogged(true);
+   
     // Simulate authentication logic 
     if (credentials.username === 'omprakash' && credentials.password === 'password') {
      // onLogin(setCredentials);
+     userLogin();
+     setLogged(true);
       alert("Login successfully")
       console.log("Login Successfully!",credentials.username);
     } else {

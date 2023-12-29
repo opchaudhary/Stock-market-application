@@ -10,6 +10,7 @@ import StockSearch from './components/SearchStock';
 import { ThemeProvider } from './context/ThemeContext';
 import { useTheme } from "./context/ThemeContext";
 import { AuthProvider } from './context/AuthContext';
+import AuthGuard from './guards/AuthGaurd';
 const App = () => {
 
 const {theme} = useTheme();
@@ -24,8 +25,10 @@ const {theme} = useTheme();
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<LandingPage />} />
+        <Route element={<AuthGuard/>} >
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path="/stocks" element={<StockSearch/>} />
+        </Route>
       </Routes>
       </div>
     </Router>
