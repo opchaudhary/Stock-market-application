@@ -1,15 +1,18 @@
 // Login.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import '../components/Login.css';
 import  {useTheme} from '../context/ThemeContext' 
+import { useAuth } from '../context/AuthContext';
 
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
-    username: '',
-    password: '',
+    username: 'omprakash',
+    password: 'password',
   });
+  const { userLogin} = useAuth();
+  const [logged, setLogged] = useState(false);
   const {theme, toggleTheme} = useTheme();
 
   const handleChange = (e) => {
@@ -20,7 +23,10 @@ const Login = () => {
     });
   };
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
+    userLogin();
+    setLogged(true);
     // Simulate authentication logic 
     if (credentials.username === 'omprakash' && credentials.password === 'password') {
      // onLogin(setCredentials);
@@ -30,6 +36,11 @@ const Login = () => {
       alert('Invalid username or password');
     }
   };
+  
+  if (logged) {
+    return <Navigate to="/dashboard" />;
+  }
+
 
   return (
     <div className="login-container" style={{ backgroundColor: theme.background, color: theme.text }}>

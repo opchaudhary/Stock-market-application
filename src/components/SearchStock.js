@@ -3,7 +3,7 @@ import useStockData from './useStockData';
 import './SearchStock.css'
 
 const StockSearch = () => {
-  const [symbol, setSymbol] = useState('AAPL');
+  const [symbol, setSymbol] = useState('');
   const { stockData, loading, error, fetchData } = useStockData();
 
   const handleSearch = () => {
@@ -14,6 +14,8 @@ const StockSearch = () => {
     if (!stockData) return null;
   
     return (
+
+   
       <div className='StockTable'>
         <h2>Table: Stock Data</h2>
         <table>
@@ -88,8 +90,12 @@ const StockSearch = () => {
     );
   };
   
+  
   return (
     <div>
+      <h1>
+      To fetch companies latest stock values, prices of bids and ask
+      </h1>
         <input
           type="text"
           value={symbol}

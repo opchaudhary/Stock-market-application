@@ -9,13 +9,14 @@ import Dashboard from './components/MainDashboard';
 import StockSearch from './components/SearchStock';
 import { ThemeProvider } from './context/ThemeContext';
 import { useTheme } from "./context/ThemeContext";
+import { AuthProvider } from './context/AuthContext';
 const App = () => {
 
 const {theme} = useTheme();
 
   return ( 
 <>
-    <ThemeProvider>
+<AuthProvider>
     <Router>
       <div >
       <Header/>
@@ -28,7 +29,7 @@ const {theme} = useTheme();
       </Routes>
       </div>
     </Router>
-    </ThemeProvider>
+   </AuthProvider>
     </>
   );
 };

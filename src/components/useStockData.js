@@ -6,7 +6,7 @@ const useStockData = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const BaseUrl = "https://api.iex.cloud/v1";
-  const token = "pk_8e0ab2b9f4474c1eae488683e98feea1";
+  const token = "pk_85f727a2802d4a7d9de64485baeb569b";
 
   const fetchData = async (symbol) => {
     try {

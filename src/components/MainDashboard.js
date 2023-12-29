@@ -9,7 +9,7 @@ const MainDashboard = () => {
   const [company, setCompany] = useState([]);
   const [tradeData, setTradeData] = useState([]);
   const [data, setData] = useState();
-  const token = 'pk_8e0ab2b9f4474c1eae488683e98feea1';
+  const token = 'pk_85f727a2802d4a7d9de64485baeb569b';
   const BaseUrl= 'https://api.iex.cloud/v1';
 
   const handleSearch = async () => {
@@ -63,6 +63,23 @@ const tradeTime = data && data[0] && data[0].trades
   : [];
 console.log("timestamp: ", tradeTime);
 
+const convertTimestampToTime = (timestamp) => {
+    const date = new Date(timestamp);
+    const hours = date.getHours();
+    const minutes = '0' + date.getMinutes();
+    const seconds = '0' + date.getSeconds();
+    const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime;
+  };
+  
+  // Example usage
+  const timestamps = tradeTime;
+  ;
+  
+  const readableTimes = timestamps.map(convertTimestampToTime);
+  console.log(readableTimes);
+  
+
 const chart = () => {
   Highcharts.chart('chart', {
       title: {
@@ -86,7 +103,7 @@ const chart = () => {
           },
       },
    xAxis: {
-          categories: tradeTime,
+          categories: readableTimes,
       },
 
       yAxis: {
