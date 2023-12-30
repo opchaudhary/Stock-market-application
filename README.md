@@ -88,4 +88,4 @@ List the key technologies or frameworks used in your project.
 
 ## Screenshots
 
-![App Screenshot]
+![App Screenshot]https://github.com/opchaudhary/Stock-market-application/blob/master/src/screenshot/Screenshot%20from%202023-12-30%2014-57-10.png
