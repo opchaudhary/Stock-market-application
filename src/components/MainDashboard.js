@@ -5,7 +5,7 @@ import News from './News';
 import CompanyData from './CompanyData';
 
 const MainDashboard = () => {
-  const [comp, setComp] = useState('');
+  const [comp, setComp] = useState('aapl');
   const [company, setCompany] = useState([]);
   const [tradeData, setTradeData] = useState([]);
   const [data, setData] = useState();
@@ -109,7 +109,7 @@ const chart = () => {
       yAxis: {
           labels: {
               style: {
-                  color: 'black',
+                  color: 'black'
               },
           },
           title: {
